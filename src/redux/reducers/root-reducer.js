@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux';
-import attendeeReducer from './attendee-reducer';
+import signUpReducer from './signup-reducer';
+import signInReducer from './signin-reducer';
+import medicalDataReducer from './medical-data-reducer';
+
 const rootReducer = combineReducers({
-    attendees: attendeeReducer,
+    signUp: signUpReducer,
+    user: signInReducer,
+    medicalData: medicalDataReducer,
 });
 export default rootReducer;
