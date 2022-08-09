@@ -1,13 +1,16 @@
 import Lock from "./icons/Lock";
 import Mail from "./icons/Mail";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { signInAction } from "../redux/actions/signin-action";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signInAsync } from "../features/signin/signInSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
     const [disableInput, setDisableInput] = useState(false);
-    const { signInAction } = props;
+    const {message, status} = useSelector((state) => state.signIn);
+    let navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleLoginForm = async (e) => {
         e.preventDefault()
         setDisableInput(true);
@@ -15,9 +18,16 @@ const Login = (props) => {
             email: e.target.elements.email.value,
             password: e.target.elements.password.value,
         }
-        await signInAction(data);
+        await dispatch(signInAsync(data))
         setDisableInput(false);
     }
+    useEffect(() => {
+        // if(status === 201){
+        //     setTimeout(() => {
+        //         navigate("/dashboard");
+        //     }, 2000)
+        // }
+    }, [status, navigate])
     return ( 
         <>
             <div className="flex justify-center items-center h-screen">
@@ -26,6 +36,25 @@ const Login = (props) => {
                         <h1 className='prose w-full text-center font-bold text-3xl'>Login Form</h1>
                     </div>
                     <form onSubmit={handleLoginForm}>
+                        {
+                            status === 201 ? (
+                                <div className="bg-green-100 border-l-4 border-green-500 text-green-500 p-4 mb-6" role="alert">
+                                    <p className="font-bold">Success Login</p>
+                                </div>
+                            ) : (
+                                ''
+                            )
+                        }
+                        {
+                            status !== 201 && status !== undefined ? (
+                                <div className="bg-red-100 border-l-4 border-red-500 text-orange-700 p-4 mb-6" role="alert">
+                                    <p className="font-bold">Error</p>
+                                    <p>{message}</p>
+                                </div>
+                            ) : (
+                                ''
+                            )
+                        }
                         <div className="relative mb-6">
                             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <Mail />
@@ -51,16 +80,4 @@ const Login = (props) => {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        signInState: state.signIn,
-    }
-  }
-
-const mapDispatchToProps = dispatch => {
-    return {
-        signInAction: (data) => dispatch(signInAction(data)),
-    }
-}
- 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login;

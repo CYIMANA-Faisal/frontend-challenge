@@ -1,17 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import AdminView from "./views/Admin";
-import {getMedicalDataAction} from "./../redux/actions/medicaldata-action"
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getMedicalDataAsync } from "../features/medicalData/medicalDataSlice";
 
 const MedicalData = (props) => {
-    const { getMedicalDataAction, user } = props;
-    const getMedicalData = async () => {
-        await getMedicalDataAction()
+    const dispatch = useDispatch();
+    // const user = useSelector((state) => state.user);
+    // const medicalData = useSelector((state) => state.medicalData);
+    const getmedicatData = async () => {
+        await dispatch(getMedicalDataAsync())
     }
     useEffect(() => {
-        getMedicalData();
+        getmedicatData()
     })
     return ( 
         <> 
@@ -30,16 +32,4 @@ const MedicalData = (props) => {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.user,
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getMedicalDataAction: () => dispatch(getMedicalDataAction()),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalData)
+export default MedicalData;
