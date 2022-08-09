@@ -3,37 +3,43 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_NODE_API_URL;
 
-
 const initialState = {
-  message: '',
-  status: '',
-  data: '',
+    message: '',
+    status: undefined,
+    data: undefined
 }
 
 export const medicalDataSlice = createSlice({
   name: 'medicalData',
   initialState: initialState,
-  reducer: {
-    addMedicalData: (state, action) => {
+  reducers: {
+    medicalData: (state, action) => {
       state.message = action.payload.message;
       state.status = action.payload.status;
-      state.data = action.payload.payload
+      state.data = action.payload.payload;
+    },
+    clearStateForMedicalData: (state, action) => {
+      state.message = '';
+      state.status = undefined;
+      state.data = undefined;
     }
   }
-});
+})
 
-export const getMedicalDataAsync = () => async (dispatch) => {
+export const medicalDataAsync = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('accessToken');
     const response = await axios.get(`${API_URL}/medical?token=${token}`);
-    console.log(response.data)
-    // dispatch(addMedicalData(response.data));
+    dispatch(medicalData(response.data));
   } catch (err) {
-    console.log(err);
-    // dispatch(addMedicalData(err.response));
+    dispatch(medicalData(err.response.data));
   }
 };
 
-export const { addMedicalData } = medicalDataSlice.actions
+export const clearMedicalDataState = () => async (dispatch) => {
+  dispatch(clearStateForMedicalData());
+};
+
+export const { medicalData, clearStateForMedicalData } = medicalDataSlice.actions
 
 export default medicalDataSlice.reducer

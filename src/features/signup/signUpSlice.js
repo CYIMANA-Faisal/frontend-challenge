@@ -9,12 +9,16 @@ const initialState = {
 }
 
 export const signUpSlice = createSlice({
-  name: 'sign',
+  name: 'signUp',
   initialState,
   reducers: {
     signUp: (state, action) => {
       state.message = action.payload.data;
       state.status = parseInt(action.payload.status);
+    },
+    clearStateForSignUp: (state, action) => {
+      state.message = '';
+      state.status = undefined;
     }
   }
 })
@@ -28,6 +32,10 @@ export const signUpAsync = (data) => async (dispatch) => {
   }
 };
 
-export const { signUp } = signUpSlice.actions
+export const clearSignUpState = () => async (dispatch) => {
+  dispatch(clearStateForSignUp());
+};
+
+export const { signUp, clearStateForSignUp } = signUpSlice.actions
 
 export default signUpSlice.reducer

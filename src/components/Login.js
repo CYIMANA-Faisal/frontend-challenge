@@ -13,25 +13,23 @@ const Login = (props) => {
     const dispatch = useDispatch();
     const handleLoginForm = async (e) => {
         e.preventDefault()
-        setDisableInput(true);
         const data = {
             email: e.target.elements.email.value,
             password: e.target.elements.password.value,
         }
         await dispatch(signInAsync(data))
-        setDisableInput(false);
     }
     useEffect(() => {
-        // if(status === 201){
-        //     setTimeout(() => {
-        //         navigate("/dashboard");
-        //     }, 2000)
-        // }
+        if(status === 201){
+            setTimeout(() => {
+                navigate("/dashboard");
+            }, 2000)
+        }
     }, [status, navigate])
     return ( 
         <>
             <div className="flex justify-center items-center h-screen">
-                <div className='bg-white w-[615px] shadow-md p-8 overflow-auto align-middle block justify-center border-t-8 border-t-orange-400'>
+                <div className='bg-white w-[615px] shadow-md p-8 overflow-auto align-middle block justify-center border-t-8 border-t-yellow-500'>
                     <div className='w-full pt-8 pb-9'>
                         <h1 className='prose w-full text-center font-bold text-3xl'>Login Form</h1>
                     </div>
@@ -68,11 +66,11 @@ const Login = (props) => {
                             <input name="password" type="password"  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" required disabled={disableInput} />
                         </div>
                         <div className="relative mb-6">
-                            <button type="submit" className="focus:outline-none text-white bg-orange-400 hover:bg-orange-400 focus:ring-4 focus:ring-orange-400 font-medium w-full text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900" disabled={disableInput}>Login</button>
+                            <button type="submit" className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-500 font-medium w-full text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900" disabled={disableInput}>Login</button>
                         </div>
                     </form>
                     <div className="relative mb-6">
-                        <p>Don't have account? <span className="text-orange-400"><Link to="/sign-up">Signup</Link></span></p>
+                        <p>Don't have account? <span className="text-yellow-500"><Link to="/sign-up">Signup</Link></span></p>
                     </div>
                 </div>
             </div>

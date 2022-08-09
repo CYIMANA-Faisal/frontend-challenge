@@ -20,7 +20,6 @@ const Signup = (props) => {
     }
     const handleSignUpForm = async (e) => {
         e.preventDefault()
-        setDisableInput(true);
         if(e.target.elements.password.value !== e.target.elements.confirmPassword.value){
             setPasswordMisMatch(true)
             setTimeout(() => {setPasswordMisMatch(false)}, 10000)
@@ -38,7 +37,6 @@ const Signup = (props) => {
             role: e.target.elements.role.value,
         }
         await dispatch(signUpAsync(data));
-        setDisableInput(false);
     }
     useEffect(() => {
         if(status === 200) {
@@ -50,9 +48,9 @@ const Signup = (props) => {
     return ( 
         <>
             <div className="flex justify-center items-center h-screen">
-                <div className='bg-white w-[615px] shadow-md p-8 overflow-auto align-middle block justify-center border-t-8 border-t-orange-400'>
+                <div className='bg-white w-[615px] shadow-md p-8 overflow-auto align-middle block justify-center border-t-8 border-t-yellow-500'>
                     <div className='w-full pb-9'>
-                        <h1 className='prose w-full text-center font-bold text-3xl'>Sign-up Form</h1>
+                        <h1 className='prose w-full text-center font-bold text-3xl'>Responsive Registration Form</h1>
                     </div>
                     <form onSubmit={handleSignUpForm}>
                         {
@@ -116,9 +114,9 @@ const Signup = (props) => {
                             <input disabled={disableInput} name="phone" type="tel" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="078 XXX XXXX" required/>
                         </div>
                         <div className="flex items-center mb-6">
-                            <input onChange={handleGender} name="gende" id="male" type="radio" value="MALE" className="w-4 h-4 text-orange-400 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <input onChange={handleGender} name="gende" id="male" type="radio" value="MALE" className="w-4 h-4 text-yellow-500 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                             <label htmlFor="male" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-4">Male</label>
-                            <input onChange={handleGender} name="gende" id="female" type="radio" value="FEMALE" className="w-4 h-4 text-orange-400 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <input onChange={handleGender} name="gende" id="female" type="radio" value="FEMALE" className="w-4 h-4 text-yellow-500 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                             <label htmlFor="female" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-4">Female</label>
                         </div>
                         <div className="relative mb-6">
@@ -143,11 +141,11 @@ const Signup = (props) => {
                             <input disabled={disableInput} name="confirmPassword" type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Re-type Password" required/>
                         </div>
                         <div className="relative mb-6">
-                            <button disabled={disableInput} type="submit" className="focus:outline-none text-white bg-orange-400 hover:bg-orange-400 focus:ring-4 focus:ring-orange-400 font-medium w-full text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Sign up</button>
+                            <button disabled={disableInput} type="submit" className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-500 font-medium w-full text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Sign up</button>
                         </div>
                     </form>
                     <div className="relative mb-6">
-                        <p>Have account? <span className="text-orange-400"><Link to="/">Sign-in</Link></span></p>
+                        <p>Have account? <span className="text-yellow-500"><Link to="/">Sign-in</Link></span></p>
                     </div>
                 </div>
             </div>

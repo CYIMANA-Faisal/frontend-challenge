@@ -2,12 +2,12 @@ import PatientView from "./Patient";
 import PharmacistsView from "./Pharmacists";
 import PhysicianView from "./Physician";
 
-const AdminView = () => {
+const AdminView = ({data}) => {
     return ( 
         <>
-            <PhysicianView />
-            <PatientView />
-            <PharmacistsView />
+           <PhysicianView data={data['Physiciansmissions20002002']} />
+            <PatientView  data={data['Patientillnesses20002002']}/>
+            <PharmacistsView data={data['Mostboughdrugs20002002']}/>
         </>
     );
 }

@@ -6,7 +6,6 @@ const API_URL = process.env.REACT_APP_JAVA_API_URL;
 const initialState = {
     message: '',
     status: undefined,
-    user: undefined
 }
 
 export const signInSlice = createSlice({
@@ -14,10 +13,12 @@ export const signInSlice = createSlice({
   initialState: initialState,
   reducers: {
     signIn: (state, action) => {
-      console.log(JSON.stringify(action.payload.user));
       state.message = action.payload.message;
       state.status = action.payload.status;
-      // state.user = action.payload.status;
+    },
+    clearStateForsignIn: (state, action) => {
+      state.message = '';
+      state.status = undefined;
     }
   }
 })
@@ -32,6 +33,10 @@ export const signInAsync = (data) => async (dispatch) => {
   }
 };
 
-export const { signIn } = signInSlice.actions
+export const clearSignInState = () => async (dispatch) => {
+  dispatch(clearStateForsignIn());
+};
+
+export const { signIn, clearStateForsignIn } = signInSlice.actions
 
 export default signInSlice.reducer
