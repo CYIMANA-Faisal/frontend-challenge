@@ -5,7 +5,8 @@ const API_URL = process.env.REACT_APP_JAVA_API_URL;
 
 const initialState = {
   message:'',
-  status: undefined
+  status: undefined,
+  isLoading: false
 }
 
 export const signUpSlice = createSlice({
@@ -19,6 +20,13 @@ export const signUpSlice = createSlice({
     clearStateForSignUp: (state, action) => {
       state.message = '';
       state.status = undefined;
+      state.isLoading = false;
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = true;
+    },
+    setIsNotLoading: (state, action) => {
+      state.isLoading = false;
     }
   }
 })
@@ -36,6 +44,14 @@ export const clearSignUpState = () => async (dispatch) => {
   dispatch(clearStateForSignUp());
 };
 
-export const { signUp, clearStateForSignUp } = signUpSlice.actions
+export const isLoadingState = () => async (dispatch) => {
+  dispatch(setIsLoading());
+};
+
+export const isNotLoadingState = () => async (dispatch) => {
+  dispatch(setIsNotLoading());
+};
+
+export const { signUp, clearStateForSignUp, setIsLoading, setIsNotLoading } = signUpSlice.actions
 
 export default signUpSlice.reducer
