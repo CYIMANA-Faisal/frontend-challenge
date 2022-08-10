@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signInAsync } from "../features/signin/signInSlice";
+import { medicalDataAsync } from "../features/medicalData/medicalDataSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
@@ -21,11 +22,12 @@ const Login = (props) => {
     }
     useEffect(() => {
         if(status === 201){
+            dispatch(medicalDataAsync())
             setTimeout(() => {
                 navigate("/dashboard");
             }, 2000)
         }
-    }, [status, navigate])
+    }, [status, navigate, dispatch])
     return ( 
         <>
             <div className="flex justify-center items-center h-screen">

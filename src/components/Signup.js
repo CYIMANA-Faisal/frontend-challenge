@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Phone from "./icons/Phone";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpAsync } from "../features/signup/signUpSlice";
+import { clearSignUpState, signUpAsync } from "../features/signup/signUpSlice";
 import { useNavigate } from "react-router-dom";
 
 const Signup = (props) => {
@@ -41,10 +41,11 @@ const Signup = (props) => {
     useEffect(() => {
         if(status === 200) {
                 setTimeout(() => {
+                    dispatch(clearSignUpState())
                     navigate("/");
                 }, 2000)
         }
-    }, [status, navigate])
+    }, [status, navigate, dispatch])
     return ( 
         <>
             <div className="flex justify-center items-center h-screen">

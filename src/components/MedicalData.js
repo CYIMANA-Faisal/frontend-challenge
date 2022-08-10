@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
 import AdminView from "./views/Admin";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import jwt_decode from 'jwt-decode'
-import {  clearMedicalDataState, medicalDataAsync } from "../features/medicalData/medicalDataSlice";
+import {  clearMedicalDataState } from "../features/medicalData/medicalDataSlice";
 import PatientView from "./views/Patient";
 import PharmacistsView from "./views/Pharmacists";
 import PhysicianView from "./views/Physician";
@@ -24,12 +23,6 @@ const MedicalData = (props) => {
         dispatch(clearSignInState())
     }
 
-    useEffect(() => {
-        const getmedicatData = async () => {
-            await dispatch(medicalDataAsync())
-        }
-        getmedicatData()
-    }, [])
     return ( 
         <> 
             <div className="flex justify-center items-center">
